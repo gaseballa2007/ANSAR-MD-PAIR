@@ -13,7 +13,7 @@
     "stop": "echo 'No stop functionality (use Ctrl+C to stop)'",
     "restart": "echo 'No restart functionality (use manual restart)'"
   },
-  "author": "Um4r719",
+  "author": "MrAnsar",
   "license": "ISC",
   "description": "",
   "dependencies": {
