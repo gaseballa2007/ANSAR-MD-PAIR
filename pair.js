@@ -40,15 +40,15 @@ router.get('/', async (req, res) => {
             if (!Um4r719.authState.creds.registered) {
                 await delay(2000);
                 num = num.replace(/[^0-9]/g, '');
-                const code = await Um4r719.requestPairingCode(num);
+                const code = await MrAnsar.requestPairingCode(num);
                 if (!res.headersSent) {
                     console.log({ num, code });
                     await res.send({ code });
                 }
             }
 
-            Um4r719.ev.on('creds.update', saveCreds);
-            Um4r719.ev.on("connection.update", async (s) => {
+            MrAnsar.ev.on('creds.update', saveCreds);
+            MrAnsar.ev.on("connection.update", async (s) => {
                 const { connection, lastDisconnect } = s;
 
                 if (connection === "open") {
@@ -69,16 +69,16 @@ router.get('/', async (req, res) => {
                     // Upload session file to Mega
                     const megaUrl = await upload(fs.createReadStream(`${dirs}/creds.json`), `${generateRandomId()}.json`);
 
-                    // Add "UMAR=" prefix to the session ID
-                    let stringSession = `UMAR=${megaUrl.replace('https://mega.nz/file/', '')}`;
+                    // Add "AnSar-MD=" prefix to the session ID
+                    let stringSession = `AnSar-MD=${megaUrl.replace('https://mega.nz/file/', '')}`;
 
                     // Send the session ID to the target number
                     const userJid = jidNormalizedUser(num + '@s.whatsapp.net');
-                    await Um4r719.sendMessage(userJid, { text: stringSession });
+                    await MrAnsar.sendMessage(userJid, { text: stringSession });
 
                     // Send confirmation message
-                    await Um4r719.sendMessage(userJid, { 
-                        text: '*Hey Dear*\n\n*Don’t Share Your Session ID With Anyone*\n\n*This IS AWAIS MD*\n\n*THANKS FOR USING AWAIS MD BOT*\n\n*CONNECT FOR UPDATES*: https://whatsapp.com/channel/0029VashGieHAdNP11OHXH3P\n\n*Follow Dev On Instagram*: https://instagram.com/um4rxd\n' 
+                    await MrAnsar.sendMessage(userJid, { 
+                        text: '*Hey Dear*\n\n*Don’t Share Your Session ID With Anyone*\n\n*This IS ANSAR-MD😎😍*\n\n*THANKS FOR USING ANSAR-MD-BOT😍😎*\n\n*CONNECT FOR UPDATES*: https://whatsapp.com/channel/0029ValASu1IN9ifummBKW1U\n' 
                     });
 
                     // Clean up session after use
@@ -102,7 +102,7 @@ router.get('/', async (req, res) => {
     await initiateSession();
 });
 
-// Um4r719 uncaught exception handler
+// AnSar-MD uncaught exception handler
 process.on('uncaughtException', (err) => {
     console.log('Caught exception: ' + err);
 });
